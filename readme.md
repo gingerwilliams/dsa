@@ -1,0 +1,8 @@
+- BigO 
+- Max Value
+- Is Prime
+- Anagrams
+- Most Frequent
+- Pair Sum
+- Pair Product
+- Intersection

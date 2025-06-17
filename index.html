@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Chat</title>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chat-log"></div>
+    <input type="text" id="message-input" />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const websocket = new WebSocket("ws://localhost:8765");
+
+        websocket.onopen = function() {
+            console.log("Connected to WebSocket");
+        };
+
+        websocket.onmessage = function(event) {
+            console.log("Received:", event.data);
+            document.getElementById("chat-log").innerHTML += "<p>" + event.data + "</p>";
+        };
+
+        websocket.onclose = function() {
+            console.log("Disconnected from WebSocket");
+        };
+
+        websocket.onerror = function(error) {
+            console.error("WebSocket error:", error);
+        };
+
+        function sendMessage() {
+            const message = document.getElementById("message-input").value;
+            websocket.send(message);
+            document.getElementById("message-input").value = "";
+        }
+    </script>
+</body>
+</html>
